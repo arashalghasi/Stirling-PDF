@@ -175,5 +175,8 @@
     "workerDirectory": [
       "portal/public"
     ]
+  },
+  "volta": {
+    "node": "22.23.1"
   }
 }
