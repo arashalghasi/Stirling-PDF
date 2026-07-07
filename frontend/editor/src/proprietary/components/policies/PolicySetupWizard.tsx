@@ -1,17 +1,17 @@
 import { useState, useMemo, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
-import { PanelHeader } from "@shared/components/PanelHeader";
+import { PanelHeader } from "@app/ui/PanelHeader";
 import { ROW_ACCENT } from "@app/components/policies/policyStatus";
-import { Card } from "@shared/components/Card";
-import { Button } from "@shared/components/Button";
-import { Input } from "@shared/components/Input";
-import { Select } from "@shared/components/Select";
-import { SettingsRow } from "@shared/components/SettingsRow";
-import { Checkbox } from "@shared/components/Checkbox";
-import { Banner } from "@shared/components/Banner";
-import { EmptyState } from "@shared/components/EmptyState";
-import { StepIndicator } from "@shared/components/StepIndicator";
+import { Card } from "@app/ui/Card";
+import { Button } from "@app/ui/Button";
+import { Input } from "@app/ui/Input";
+import { Select } from "@app/ui/Select";
+import { SettingsRow } from "@app/ui/SettingsRow";
+import { Checkbox } from "@app/ui/Checkbox";
+import { Banner } from "@app/ui/Banner";
+import { EmptyState } from "@app/ui/EmptyState";
+import { StepIndicator } from "@app/ui/StepIndicator";
 import type {
   PolicyCategory,
   PolicyConfigDef,
@@ -409,8 +409,8 @@ export function PolicySetupWizard({
                     <Select
                       inputSize="sm"
                       value={runOn}
-                      onChange={(e) =>
-                        setRunOn(e.target.value as "upload" | "export")
+                      onChange={(value) =>
+                        setRunOn((value ?? "upload") as "upload" | "export")
                       }
                       aria-label={t("policies.wizard.runOnLabel", "Run on")}
                       options={[
@@ -437,8 +437,8 @@ export function PolicySetupWizard({
                     <Select
                       inputSize="sm"
                       value={outputMode}
-                      onChange={(e) => {
-                        const mode = e.target.value as
+                      onChange={(value) => {
+                        const mode = (value ?? "new_file") as
                           | "new_file"
                           | "new_version";
                         setOutputMode(mode);
@@ -481,9 +481,12 @@ export function PolicySetupWizard({
                   <Select
                     inputSize="sm"
                     value={outputNamePosition}
-                    onChange={(e) =>
+                    onChange={(value) =>
                       setOutputNamePosition(
-                        e.target.value as "prefix" | "suffix" | "auto-number",
+                        (value ?? "suffix") as
+                          | "prefix"
+                          | "suffix"
+                          | "auto-number",
                       )
                     }
                     aria-label={t(
